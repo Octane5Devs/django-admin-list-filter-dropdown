@@ -22,13 +22,15 @@
 </ul>
 <script type="text/javascript">var go_from_select = function(opt) { window.location = window.location.pathname + opt };</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 <script type="text/javascript">
     var go_from_select = function(opt) { window.location = window.location.pathname + opt };
-    $('select').selectize({
-        plugins: ['restore_on_backspace'],
-        maxItems: 1
+    $('select').chosen({
+        disable_search_threshold: 10,
+        no_results_text: "Nothing Found",
+        max_selected_options: 1,
+        allow_single_deselect: true,
     });
 </script>
 
