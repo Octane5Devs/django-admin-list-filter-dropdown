@@ -3,7 +3,7 @@
 <ul class="admin-filter-{{ title|cut:' ' }}">
 {% if choices|slice:"4:" %}
     <li>
-    <select class="form-control" style="width: 95%;margin-left: 2%;"
+    <select id="{{ title|slugify }}_filter_select" class="form-control" style="width: 95%;margin-left: 2%;"
         onchange="go_from_select(this.options[this.selectedIndex].value)">
     {% for choice in choices %}
         <option{% if choice.selected %} selected="selected"{% endif %}
@@ -12,22 +12,19 @@
     </select>
     </li>
 {% else %}
-
     {% for choice in choices %}
             <li{% if choice.selected %} class="selected"{% endif %}>
             <a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a></li>
     {% endfor %}
-
 {% endif %}
 </ul>
-<script type="text/javascript">var go_from_select = function(opt) { window.location = window.location.pathname + opt };</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 <script type="text/javascript">
     var go_from_select = function(opt) { window.location = window.location.pathname + opt };
-    $('select').chosen({
-        disable_search_threshold: 10,
+    $('select#{{ title|slugify }}_filter_select').chosen({
+        disable_search_threshold: 1,
         no_results_text: "Nothing Found",
         max_selected_options: 1,
         allow_single_deselect: true,
