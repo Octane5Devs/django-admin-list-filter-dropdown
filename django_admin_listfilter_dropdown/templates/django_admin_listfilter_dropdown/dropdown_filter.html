@@ -23,7 +23,7 @@
 <script type="text/javascript">
     (function($) {
         $('select#{{ title|slugify }}_filter_select').change(function(evt) {
-            window.location.href = $(this).val();
+            window.location = window.location.pathname + $(this).val();
         });
     })(django.jQuery);
 
