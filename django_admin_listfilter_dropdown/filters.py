@@ -263,6 +263,34 @@ class MultiSelectRelatedDropdownFilter(MultiSelectRelatedFilter):
             }
 
 
+class MultiSelectRelatedOnlyDropdownFilter(MultiSelectRelatedOnlyFilter):
+    template = 'django_admin_listfilter_dropdown/multi_select_filter.html'
+
+    def choices(self, changelist):
+        query_string = changelist.get_query_string({}, [self.lookup_kwarg, self.lookup_kwarg_isnull])
+        yield {
+            'selected': not self.lookup_vals and not self.lookup_val_isnull,
+            'query_string': query_string,
+            'display': _('All'),
+        }
+        for pk_val, val in self.lookup_choices:
+            pk_val = str(pk_val)
+            yield {
+                'selected': pk_val in self.lookup_vals,
+                'query_string': query_string,
+                'display': val,
+                'value': pk_val,
+                'key': self.lookup_kwarg,
+            }
+        if self.include_empty_choice:
+            yield {
+                'selected': bool(self.lookup_val_isnull),
+                'query_string': query_string,
+                'display': self.empty_value_display,
+                'value': 'True',
+                'key': self.lookup_kwarg_isnull,
+            }
+
 # Filter for annotated attributes.
 # NOTE: The code is more or less the same than admin.FieldListFilter but
 # we must not subclass it. Otherwise django's filter setup routine wants a real
