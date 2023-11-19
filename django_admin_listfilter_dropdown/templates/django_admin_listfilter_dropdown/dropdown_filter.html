@@ -3,7 +3,8 @@
 <ul class="admin-filter-{{ title|cut:' ' }}">
 {% if choices|slice:"4:" %}
     <li>
-    <select id="{{ title|slugify }}_filter_select" class="form-control" style="width: 95%;margin-left: 2%;">
+    <select id="{{ title|slugify }}_filter_select" name="{{ title|slugify }}_filter_select" class="form-control" style="width: 95%;margin-left: 2%;"
+        onchange="go_from_select(this.options[this.selectedIndex].value)">
     {% for choice in choices %}
         <option{% if choice.selected %} selected="selected"{% endif %}
          value="{{ choice.query_string|iriencode }}">{{ choice.display }}</option>
@@ -21,11 +22,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 <script type="text/javascript">
-    (function($) {
-        $('select#{{ title|slugify }}_filter_select').change(function(evt) {
-            window.location = window.location.pathname + $(this).val();
-        });
-    })(django.jQuery);
+    var go_from_select = function(opt) { window.location = window.location.pathname + opt };
 
     $('select#{{ title|slugify }}_filter_select').chosen({
         disable_search_threshold: 1,

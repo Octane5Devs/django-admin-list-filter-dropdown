@@ -7,7 +7,7 @@
         </li>
     {% endfor %}
     <li>
-        <select id="{{ title|slugify }}_filter_multi" multiple class="form-control" style="width:95%; margin-left: 2%">
+        <select id="{{ title|slugify }}_filter_multi" name="{{ title|slugify }}_filter_multi" multiple class="form-control" style="width:95%; margin-left: 2%">
         {% for choice in choices|slice:"1:" %}
             <option{% if choice.selected %} selected{% endif %}
                 value="{{ choice.value }}"
