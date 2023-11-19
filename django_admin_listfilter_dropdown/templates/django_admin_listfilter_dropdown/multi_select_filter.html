@@ -33,10 +33,10 @@
 <script type="text/javascript">
     var submit_selections = function() {
         // fetch data from selected options
-        var params = {};
-        var query = null;
+        let params = {};
+        let query = null;
         $('select#{{ title|slugify }}_filter_multi > option:selected').each(function() {
-            var key = $(this).attr('data-key');
+            let key = $(this).attr('data-key');
             if (! params.hasOwnProperty(key)) params[key] = [];
             params[key].push($(this).val());
             if (!query) query = $(this).attr('data-query');
@@ -47,13 +47,14 @@
 
         console.log(params);
         // build up the href
-        var params_query = '';
+        let params_query = '';
         for (var key in params) {
             if (params.hasOwnProperty(key)) {
                 params_query += '&' + key + '=' + params[key].join()
             }
         }
-        this.location = this.location.pathname + query + params_query;
+        let new_location = this.location.pathname + query + params_query;
+        this.location.assign(new_location);
     };
 
     $('select#{{ title|slugify }}_filter_multi').chosen({
