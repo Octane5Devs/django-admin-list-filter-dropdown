@@ -53,7 +53,7 @@
                 params_query += '&' + key + '=' + params[key].join()
             }
         }
-        this.href = query + params_query;
+        window.location.assign(window.location.pathname + params_query);
     };
 
     $('select#{{ title|slugify }}_filter_multi').chosen({
