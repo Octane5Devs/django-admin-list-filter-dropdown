@@ -45,7 +45,6 @@
         // do we had selected options at all?
         if (!query) return false;
 
-        console.log(params);
         // build up the href
         let params_query = '';
         for (var key in params) {
@@ -54,7 +53,7 @@
             }
         }
         let new_location = this.location.pathname + query + params_query;
-        this.location.assign(new_location);
+        this.location.href = new_location
     };
 
     $('select#{{ title|slugify }}_filter_multi').chosen({
